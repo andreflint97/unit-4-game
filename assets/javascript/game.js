@@ -2,13 +2,14 @@
 
 $( document ).ready(function() {
 
+    
 
-    var yourFighter;
+    var yourCharacter;
     var defender;
     var characterSelected = false;
     var defenderSelected = true;
-    var yourFighterPower;
-    var yourFighterHp;
+    var yourCharacterPower;
+    var yourCharacterHp;
     var defenderPower;
     var defenderHp;
     var attack;
@@ -27,20 +28,20 @@ function startGame() {
             $('body').on('click', '.character', function(){
                 
                     $(this).removeClass('col-md-3 character').addClass('col characterSelected');
-                    yourFighter = $(this).data("name");
-                     $('.characterSelected').appendTo('#your-fighter');
-                    console.log(yourFighter);
+                    yourCharacter = $(this).data("name");
+                     $('.characterSelected').appendTo('#your-character');
+                    console.log(yourCharacter);
                     
                     $('.character').appendTo('#available-enemies').removeClass('character').addClass('defender');
 
-                    yourFighterPower = $(this).data("power");
-                    console.log('Power = ' + yourFighterPower);
+                    yourCharacterPower = $(this).data("power");
+                    console.log('Power = ' + yourCharacterPower);
 
                     attackPlus = $(this).data("power");
                     console.log('attackPlus = ' + attackPlus);
 
-                    yourFighterHp = $(this).data("hp");
-                    console.log('HP = ' + yourFighterHp);
+                    yourCharacterHp = $(this).data("hp");
+                    console.log('HP = ' + yourCharacterHp);
                     
             });
         
@@ -53,7 +54,7 @@ function startGame() {
                 defender = $(this).data("name");
                 console.log(defender);
                
-                $('.enemySelected').appendTo('#enemy');
+                $('.enemySelected').appendTo('#the-defender');
                
                 defenderPower = $(this).data("power");
                 console.log('Power = ' + defenderPower);
@@ -72,17 +73,17 @@ function startGame() {
                 
                 attack();
 
-                $('#attack-dialogue').show().html('<p>' + 'You attacked ' + defender + ' for ' + yourFighterPower + ' damage' + '<p>' + 
+                $('#attack-dialogue').show().html('<p>' + 'You attacked ' + defender + ' for ' + yourCharacterPower + ' damage' + '<p>' + 
                 '<p>' + defender + ' counter attacked you ' +  ' for ' + defenderPower + ' damage' + '<p>');
 
 
                 if (defenderHp <= 0) {
                     $('.enemySelected').addClass('hide').removeClass('enemySelected');
-
+                
                     
                 }
 
-                if (yourFighterHp <= 0) {
+                if (yourCharacterHp <= 0) {
                     $('.characterSelected').addClass('hide').removeClass('characterSelected'); 
                     $('.btn-danger').text('RESET');
                     $('.btn-danger').click(function() {
@@ -98,21 +99,21 @@ function startGame() {
             
             
 
-        }; /
+        }; // startGame   
 
             function attack() {
             
-                    yourFighterHp -= defenderPower;
-                    $("#your-fighter #hp").text(yourFighterHp);
-                    console.log('yourFighterHp = ' + yourFighterHp);
+                    yourCharacterHp -= defenderPower;
+                    $("#your-character #hp").text(yourCharacterHp);
+                    console.log('yourCharacterHp = ' + yourCharacterHp);
                     
                     
-                    defenderHp -= yourFighterPower;
-                    $("#enemy #hp").text(defenderHp);
+                    defenderHp -= yourCharacterPower;
+                    $("#the-defender #hp").text(defenderHp);
                     console.log('defenderHp = ' + defenderHp);
 
-                    yourFighterPower = yourFighterPower + attackPlus;
-                    console.log('yourFighterPower = ' + yourFighterPower);
+                    yourCharacterPower = yourCharacterPower + attackPlus;
+                    console.log('yourCharacterPower = ' + yourCharacterPower);
 
   
 
